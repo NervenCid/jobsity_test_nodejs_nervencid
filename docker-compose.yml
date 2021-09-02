@@ -1,0 +1,41 @@
+#Esto es un comentario
+
+#Para ejecutar este archivo:
+#   >docker-compose up
+
+#Definimos la version (En este caso '3.1' es OBLIGATORIO)
+version: '3.1'
+
+#Definimos los servicios
+services:
+    #En realidad puede tener cualquier nombre pero aqui lo llamamos 'api-service'
+    api-service:
+        #Construimos la imagen basada en el archivo 'Dockerfile' del directorio actual 
+        build: ./api-service
+        #Definimos los puertos externos/internos
+        ports: 
+            - "3001:3001"
+        networks:
+            - app
+        
+    stock-service:
+        #Construimos la imagen basada en el archivo 'Dockerfile' del directorio actual 
+        build: ./stock-service
+        #Definimos los puertos externos/internos
+        ports: 
+            - "3002:3002"
+        networks:
+            - app
+    db:
+        image: mongo
+        ports:
+            - "27017:27017"  
+        volumes:
+          - ./data:/data/db 
+        networks:
+            - app     
+networks: 
+    app:
+        driver: bridge
+
+        
