@@ -23,7 +23,7 @@ const axios = require('axios');
 //-----------------------------ROUTES-----------------------------------
 
 //Route for get the stocks
-router.get('/sotck', verifyToken, async (req, res) =>{    
+router.get('/stock', verifyToken, async (req, res) =>{    
 
     //Get the user from mongoDB
     const user = await User.findById(req.userId, { password: 0});    
